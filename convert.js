@@ -1,6 +1,7 @@
 const
     walk = require('walk'),
     fs = require('fs'),
+    path = require('path'),
     strip = require('strip-comments');
 
 // Init
@@ -43,7 +44,11 @@ function run(dir, skippedDirs){
 
     walker.on("file", function (root, fileStats, next) {
 
-        console.log(`${root}/${fileStats.name}`);
+        // Skip files that aren't js 
+        if(path.extname(fileStats.name) !== '.js' ) 
+            return next();
+        
+        console.log(`dealing :  ${root}/${fileStats.name}`);
         let content = fs.readFileSync(`${root}/${fileStats.name}`, 'utf-8');
         //console.log(content);
 
@@ -52,7 +57,7 @@ function run(dir, skippedDirs){
         
         fs.writeFileSync(`${root}/${fileStats.name}`, converted)
 
-        next();
+        return next();
     });
 
     walker.on("errors", function (root, nodeStatsArray, next) {

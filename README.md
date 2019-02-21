@@ -1,6 +1,6 @@
 # StripComment
 
-A small convertor that strips comment for all files in a folder using strip-comments and Walk. 
+A small convertor that strips comment for all javascript files in a folder using strip-comments and Walk. 
 
 ## Getting Started
 
